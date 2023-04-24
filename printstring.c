@@ -1,8 +1,8 @@
 #include "main.h"
 /**
  * print_string - prints a string
- * @str : the string
- * Return : 1 if success, 0 if not
+ * @ptr : the string
+ * Return: 1 if success, 0 if not
  */
 int print_string(va_list ptr)
 {
