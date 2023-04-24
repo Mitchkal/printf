@@ -10,12 +10,7 @@ int _printf(const char *format, ...)
 {
 	va_list ptr; /* pointer to argument list*/
 	int count = 0;
-	print_func_t funcs[] = {
-		{ 'c', print_char},
-		{'s', print_string},
-		{'%', print_percent},
-		{'\0', NULL}
-	};
+
 
 	va_start(ptr, format);
 
@@ -23,19 +18,18 @@ int _printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			int i = 0;
-
 			format++; /*move to next*/
 
-			while (funcs[i].spec)
+			if (is_conversion_specifier(*format))
 			{
-				if (funcs[i].spec == *format)
-				{
-					count += funcs[i].print(ptr);
-					break;
-
-				}
-				i++;
+				count += handle_conversion_specifier(ptr, *format);
+			}
+			else
+			{
+				/*handle unknown*/
+				_putchar('%');
+				_putchar(*format);
+				count += 2;
 			}
 		}
 		else
