@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * print_string - prints a string
- * @ptr : the string
+ * @ptr : the string pointer
  * Return: 1 if success, 0 if not
  */
 int print_string(va_list ptr)
