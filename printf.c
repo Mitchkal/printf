@@ -24,6 +24,7 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			int i = 0;
+
 			format++; /*move to next*/
 
 			while (funcs[i].spec)
