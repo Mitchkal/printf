@@ -1,8 +1,8 @@
 #include "main.h"
 /**
  * print_string - prints a string
- * @ptr : the string pointer
- * Return: 1 if success, 0 if not
+ * @ptr : pointer the string
+ * Return: character count
  */
 int print_string(va_list ptr)
 {

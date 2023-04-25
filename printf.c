@@ -11,7 +11,6 @@ int _printf(const char *format, ...)
 	va_list ptr; /* pointer to argument list*/
 	int count = 0;
 
-
 	va_start(ptr, format);
 
 	while (*format != '\0')
@@ -22,11 +21,18 @@ int _printf(const char *format, ...)
 
 			if (is_conversion_specifier(*format))
 			{
-				count += handle_conversion_specifier(ptr, *format);
+				int ret = hand_spec(ptr, *format);
+
+				if (ret == -1)/*ignore unknown*/
+				{
+					_putchar('%');
+					_putchar(*format);
+					count += 2;
+				}
+				count += ret;
 			}
-			else
+			else if (*format != '\0') /*print the unknown*/
 			{
-				/*handle unknown*/
 				_putchar('%');
 				_putchar(*format);
 				count += 2;
