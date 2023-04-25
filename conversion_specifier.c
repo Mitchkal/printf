@@ -10,6 +10,14 @@ int is_conversion_specifier(char c)
 		{'c', NULL},
 		{'s', NULL},
 		{'%', NULL},
+		{'b', NULL},
+		{'d', NULL},
+		{'i', NULL},
+		{'u', NULL},
+		{'o', NULL},
+		{'p', NULL},
+		{'x', NULL},
+		{'X', NULL},
 		{'\0', NULL}
 	};
 
@@ -27,17 +35,25 @@ int is_conversion_specifier(char c)
 }
 
 /**
-* handle_conversion_specifier - handles conversion specifier
+* hand_spec - handles conversion specifier
 * @ptr : pointer to argument list
 * @spec: conversion specifier character
 * Return: number of characters printed
 */
-int handle_conversion_specifier(va_list ptr, char spec)
+int hand_spec(va_list ptr, char spec)
 {
 	print_func_t funcs[] = {
 		{'c', print_char},
 		{'s', print_string},
 		{'%', print_percent},
+		{'b', print_binary},
+		{'d', print_decimal},
+		{'i', print_decimal},
+		{'u', print_unsigned},
+		{'o', print_octal},
+		{'P', print_address},
+		{'x', print_hex},
+		{'X', print_hex_upper},
 		{'\0', NULL}
 	};
 	int i = 0;
@@ -46,9 +62,11 @@ int handle_conversion_specifier(va_list ptr, char spec)
 	{
 		if (funcs[i].spec == spec)
 		{
-			return (funcs[i].print(ptr));
+			int ret = funcs[i].print(ptr);
+
+			return (ret);
 		}
 		i++;
 	}
-	return (0);
+	return (-1);
 }
