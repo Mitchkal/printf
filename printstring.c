@@ -15,6 +15,5 @@ int print_string(va_list ptr)
 		str++;
 		count++;
 	}
-	count--;
-	return (count);
+	return (count - 1);
 }
